@@ -1,0 +1,36 @@
+{% extends 'authentication/base.html' %}
+
+{% block title %} Registration {% endblock %}
+
+
+{% block content %}
+
+<h2>Register</h2>
+<div class="row">
+    <form method="POST" class="col s12" action="{% url 'register' %}">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="row amber lighten-3">
+                <div class="grid-example col 12">
+                    <span class="flow-text">Your Form Has Errors ....</span>
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {{ field.errors }}
+                            {% endif%}
+                        {% endfor %}
+                    
+                </div>
+            </div>
+        {% endif %}
+
+        {{ form.as_p }}
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="submit" value="Register" class="btn waves-effect waves-light">
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
